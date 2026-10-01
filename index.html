@@ -1,0 +1,286 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>МЭС АКС Демо</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400&family=Tinos:ital,wght@0,400;1,400&display=swap">
+<style>
+/* Раскладка: приложение в духе программы — шапка с брендом, стеклянные плашки на сияющем фоне, нижнее меню на телефоне и верхнее на широком экране.
+   Палитра МЭС: синий фон, оранжевый акцент. Тёмная тема основная, светлая переключается кнопкой. */
+:root{--void:#07090d;--paper:#fff;--text:#e6ebf5;--mist:#d3d9e4;--fog:#8c93a1;--ink2:#d3d9e4;--orange:#f18d17;--orange2:#ffb04f;--blue:#7fa8e6;--blue2:#5b8fd6;
+--glass:rgba(255,255,255,.055);--glass2:rgba(255,255,255,.09);--line:rgba(255,255,255,.12);--field:rgba(6,12,24,.55);--chipsel:#fff;--chipsel-fg:#14213a;--btnlight:#fff;--btnlight-fg:#14213a;
+--a1:rgba(62,121,200,.85);--a2:rgba(38,88,160,.6);--a3:rgba(36,80,150,.45);--a4:rgba(241,141,23,0);--base:#09101d;--navbg:rgba(10,16,30,.72);--shadow:0 20px 50px -24px rgba(0,0,0,.8);
+--serif:"Tinos","Liberation Serif","Times New Roman",serif;--sans:"Roboto","Liberation Sans",Arial,sans-serif;--mono:"Roboto Mono","Liberation Mono",Consolas,monospace;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--void:#f2f4f8;--paper:#1e2433;--text:#1e2433;--mist:#353d4f;--fog:#6b7385;--ink2:#353d4f;--orange:#f18d17;--orange2:#d9760a;--blue:#2f62a8;--blue2:#2f62a8;--glass:rgba(255,255,255,.72);--glass2:rgba(255,255,255,.9);--line:rgba(30,36,51,.12);--field:rgba(255,255,255,.9);--chipsel:#1e2433;--chipsel-fg:#fff;--btnlight:#1e2433;--btnlight-fg:#fff;--a1:rgba(141,181,236,.95);--a2:rgba(179,205,242,.8);--a3:rgba(255,194,122,.7);--a4:rgba(255,214,163,.6);--base:#f2f4f8;--navbg:rgba(255,255,255,.8);--shadow:0 20px 40px -26px rgba(35,74,126,.45);color-scheme:light}}
+:root[data-theme="light"]{--void:#f2f4f8;--paper:#1e2433;--text:#1e2433;--mist:#353d4f;--fog:#6b7385;--ink2:#353d4f;--orange:#f18d17;--orange2:#d9760a;--blue:#2f62a8;--blue2:#2f62a8;--glass:rgba(255,255,255,.72);--glass2:rgba(255,255,255,.9);--line:rgba(30,36,51,.12);--field:rgba(255,255,255,.9);--chipsel:#1e2433;--chipsel-fg:#fff;--btnlight:#1e2433;--btnlight-fg:#fff;--a1:rgba(141,181,236,.95);--a2:rgba(179,205,242,.8);--a3:rgba(255,194,122,.7);--a4:rgba(255,214,163,.6);--base:#f2f4f8;--navbg:rgba(255,255,255,.8);--shadow:0 20px 40px -26px rgba(35,74,126,.45);color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--text);font:400 15px/1.5 var(--sans);-webkit-font-smoothing:antialiased;padding-inline:0;padding-block:0;min-height:100%}
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+ radial-gradient(60% 45% at 0% 0%,var(--a1),transparent 70%),radial-gradient(55% 40% at 100% 0%,var(--a3),transparent 70%),radial-gradient(50% 40% at 15% 100%,var(--a2),transparent 70%),radial-gradient(45% 35% at 100% 100%,var(--a4),transparent 70%),var(--base)}
+.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding-inline:16px;padding-block:14px calc(110px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:18px}
+header.top{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand svg{width:30px;height:30px;flex:none}
+.brand b{display:block;font:500 15px/1.1 var(--sans);color:var(--paper)}
+.brand small{display:block;font:400 10px/1.2 var(--mono);letter-spacing:.06em;color:var(--fog);text-transform:uppercase}
+.spacer{flex:1}
+.demo{font:400 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--orange2);border:1px solid var(--line);border-radius:99px;padding:6px 10px;white-space:nowrap}
+@media (max-width:899px){footer.foot{margin-bottom:56px}}
+footer.foot{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:center;text-align:center;font-size:12px;color:var(--fog);padding-top:8px}
+.iconbtn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--paper);display:grid;place-items:center;cursor:pointer;flex:none}
+.iconbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+nav.menu{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:2px;padding:5px;border-radius:99px;background:var(--navbg);border:1px solid var(--line);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);box-shadow:var(--shadow);max-width:calc(100% - 24px)}
+nav.menu button{display:flex;flex-direction:column;align-items:center;gap:3px;border:0;background:none;color:var(--fog);font:500 11px/1 var(--sans);padding:9px 12px;border-radius:99px;cursor:pointer;min-width:66px}
+nav.menu button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+nav.menu button[aria-current="page"]{color:var(--paper);background:var(--glass2);box-shadow:inset 0 0 0 1px var(--line)}
+@media (min-width:900px){nav.menu{position:static;transform:none;align-self:center;order:-1;margin-top:-52px;margin-bottom:6px}nav.menu button{flex-direction:row;gap:8px;font-size:14px;padding:11px 18px}.app{padding-block:14px 60px}header.top{margin-bottom:0}}
+.eyebrow{display:flex;align-items:center;gap:8px;font:400 10px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--fog)}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px var(--orange)}
+h1{font:400 clamp(34px,9vw,52px)/1 var(--serif);letter-spacing:-.03em;margin:12px 0 0;color:var(--paper);text-wrap:balance}
+h1 em{font-style:italic;background:linear-gradient(95deg,#f18d17,#ffc27a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+:root[data-theme="light"] h1 em{background:linear-gradient(95deg,#d9760a,#f18d17);-webkit-background-clip:text;background-clip:text}
+.lead{color:var(--fog);font-size:15px;margin:10px 0 0;max-width:60ch}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:18px;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.1);min-width:0}
+.card h2{font:500 17px/1.25 var(--sans);margin:0;color:var(--paper)}
+.card .sub{font-size:13px;color:var(--fog);margin:4px 0 14px}
+.grid{display:grid;gap:14px;min-width:0}
+.cols2{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lbl{font:400 12px/1.2 var(--sans);color:var(--fog);margin:12px 0 6px}
+input[type=text],select,textarea{width:100%;background:var(--field);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:400 15px var(--sans);min-width:0}
+input:focus,select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(241,141,23,.18)}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--fog) 50%),linear-gradient(135deg,var(--fog) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:36px}
+.chip{border:1px solid var(--line);background:none;color:var(--mist);border-radius:99px;padding:8px 14px;font:400 13px var(--sans);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--chipsel);color:var(--chipsel-fg);border-color:transparent;font-weight:500}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:99px;background:rgba(6,12,24,.4);border:1px solid var(--line);max-width:100%;overflow-x:auto}
+:root[data-theme="light"] .seg{background:rgba(30,36,51,.06)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .seg{background:rgba(30,36,51,.06)}}
+.seg button{border:0;background:none;color:var(--fog);border-radius:99px;padding:8px 13px;font:400 13px var(--sans);cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--glass2);color:var(--paper);font-weight:500;box-shadow:inset 0 0 0 1px var(--line)}
+.btn{border:1px solid transparent;border-radius:99px;padding:12px 20px;font:500 14px var(--sans);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.primary{background:linear-gradient(180deg,#ffa73a,#f18d17);color:#14213a;box-shadow:0 10px 24px -12px rgba(241,141,23,.8)}
+.btn.light{background:var(--btnlight);color:var(--btnlight-fg)}
+.btn.ghost{background:none;border-color:var(--line);color:var(--paper)}
+.btn.link{background:none;color:var(--orange2);padding:8px 4px}
+.btn:disabled{opacity:.45;cursor:default}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sw{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);cursor:pointer;padding:6px 0;background:none;border:0;text-align:left;font-family:var(--sans)}
+.sw i{width:40px;height:24px;border-radius:99px;background:var(--line);position:relative;flex:none;transition:background .2s}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.sw[aria-pressed="true"] i{background:var(--orange)}
+.sw[aria-pressed="true"] i::after{transform:translateX(16px)}
+.mail{display:flex;gap:12px;align-items:flex-start;padding:12px 4px;border-top:1px solid var(--line);cursor:pointer;background:none;border-left:0;border-right:0;border-bottom:0;width:100%;text-align:left;color:inherit;font-family:var(--sans)}
+.mail:first-of-type{border-top:0}
+.cb{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--fog);flex:none;margin-top:2px;display:grid;place-items:center}
+.mail[aria-pressed="true"] .cb{background:var(--orange);border-color:var(--orange)}
+.mail[aria-pressed="true"] .cb::after{content:"";width:5px;height:9px;border:solid #14213a;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.mail b{display:block;font-weight:500;color:var(--paper)}
+.mail small{display:block;color:var(--fog);font-size:12px}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--fog);text-transform:uppercase}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{border-radius:18px;padding:14px 16px;background:var(--glass);border:1px solid var(--line);min-width:0}
+.kpi .mono{display:flex;align-items:center;gap:7px}
+.kpi .mono i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.kpi strong{display:block;font:400 clamp(26px,7vw,34px)/1.15 var(--sans);color:var(--paper);margin-top:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi small{color:var(--fog);font-size:12px}
+.chartbox{overflow-x:auto}
+svg.chart{width:100%;min-width:520px;height:auto;display:block}
+svg.chart text{fill:var(--fog);font:400 10px var(--mono)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--mist)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:420px;font-variant-numeric:tabular-nums}
+th{font:400 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fog);text-align:left;padding:10px 8px}
+td{padding:11px 8px;border-top:1px solid var(--line);font-size:14px}
+td.n,th.n{text-align:right}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:3px 10px;font:400 11px var(--mono);letter-spacing:.03em}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.pill.ok::before{background:var(--blue)}
+.letter{background:var(--field);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:14px;display:flex;flex-direction:column;gap:8px}
+.letter .meta{font:400 11px/1.6 var(--mono);color:var(--fog);border-bottom:1px solid var(--line);padding-bottom:8px}
+.toast{position:fixed;z-index:40;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom,0px));max-width:calc(100% - 32px);background:var(--btnlight);color:var(--btnlight-fg);border-radius:14px;padding:12px 16px;font:500 14px var(--sans);box-shadow:var(--shadow)}
+dialog{border:1px solid var(--line);border-radius:22px;background:var(--base);color:var(--text);padding:20px;max-width:min(560px,calc(100% - 32px));width:100%;box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(3,6,12,.6);backdrop-filter:blur(4px)}
+dialog h3{font:500 18px var(--sans);margin:0 0 12px;color:var(--paper)}
+.log{font:400 12px/1.7 var(--mono);color:var(--mist);background:var(--field);border:1px solid var(--line);border-radius:12px;padding:12px;max-height:180px;overflow:auto;white-space:pre-wrap}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#f18d17,#ffc27a);width:0;transition:width .3s}
+.hidden{display:none!important}
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="aurora"></div>
+<div class="app" id="app">
+<header class="top">
+ <div class="brand"><svg viewBox="0 0 59 59" aria-hidden="true"><path d="M8.62994 8.62192C3.73953 13.5095 0.720259 19.9615 0.0996223 26.8508C-0.521015 33.7402 1.29646 40.6287 5.23448 46.3131C9.17251 51.9973 14.9807 56.1161 21.6444 57.9494C28.308 59.7828 35.4033 59.2143 41.6907 56.3433L37.8287 49.2739L55.5226 55.5751L8.62994 8.62192Z" fill="#F18D17"/><path d="M50.3145 50.3773C55.2107 45.4919 58.2351 39.039 58.8585 32.1473C59.482 25.2555 57.6647 18.3638 53.7247 12.6776C49.7848 6.99144 43.9728 2.87285 37.3057 1.0423C30.6386 -0.788238 23.5407 -0.214189 17.2536 2.66403L21.1158 9.72541L3.42188 3.40776L50.3145 50.3773Z" fill="#234A7E"/><path d="M49.8737 31.0566H46.5422C46.1585 32.5849 45.2195 33.4185 43.864 33.4185C42.3126 33.4185 41.4146 32.2988 41.4146 30.3537C41.4146 28.2533 42.427 25.3846 44.9173 25.3846C46.3952 25.3846 47.0403 26.1365 47.0812 27.5667H50.3472V27.2807C50.3472 24.461 48.2733 22.6548 45.0643 22.6548C40.6796 22.6548 38.0831 26.1038 38.0831 30.3864C38.0831 34.0152 40.1407 36.1074 43.6599 36.1074C45.1384 36.193 46.5956 35.7225 47.7452 34.7879C48.8949 33.8534 49.654 32.5226 49.8737 31.0566ZM37.6831 28.384C37.6831 24.747 35.6335 22.6631 32.1144 22.6631C28.9871 22.6631 26.7744 24.2976 25.9823 27.1826H29.3954C29.5491 26.6509 29.8709 26.1834 30.3126 25.8505C30.7543 25.5174 31.2919 25.3367 31.845 25.3355C33.233 25.3355 34.1149 26.2427 34.2944 27.8527H30.2118L29.6486 30.4517H34.0169C33.5678 32.0046 32.5553 33.3776 30.8242 33.3776C29.3463 33.3776 28.6932 32.6175 28.6604 31.1873H25.3944V31.4815C25.3944 34.3012 27.4684 36.0992 30.6773 36.0992C35.062 36.0992 37.6585 32.6502 37.6585 28.3758L37.6831 28.384ZM26.0476 22.9491H21.2302L19.0338 26.9701C18.1129 28.5877 17.3918 30.3111 16.8863 32.1027C16.9625 30.7185 16.9324 29.3304 16.7965 27.9509L16.38 22.9491H11.6851L8.98242 35.805H12.1587L13.2691 30.3537C13.5958 28.7764 13.8897 27.1908 14.0857 25.597C14.0857 27.0273 14.1592 28.433 14.298 29.8634L14.894 35.805H17.4742L20.528 29.9531C21.2792 28.5066 21.9324 27.0437 22.5611 25.548C22.1284 27.0764 21.7446 28.6373 21.4099 30.2066L20.185 35.805H23.3531L26.0476 22.9491Z" fill="white"/></svg><div><b>МЭС АКС</b><small>Мосэнергосбыт</small></div></div>
+ <div class="spacer"></div>
+ <button class="iconbtn" id="theme" aria-label="Сменить тему" title="Сменить тему"><svg viewBox="0 0 24 24"><path id="themeicon" d=""/></svg></button>
+</header>
+<main id="screen"></main>
+<footer class="foot"><span class="demo">Демо · данные вымышленные</span><span>Письма никуда не отправляются, адреса почты придуманы.</span></footer>
+</div>
+<nav class="menu" id="menu" aria-label="Разделы"></nav>
+<dialog id="dlg"><div id="dlgbody"></div><div class="row" style="margin-top:16px;justify-content:flex-end"><button class="btn light" id="dlgclose">Закрыть</button></div></dialog>
+<div class="toast hidden" id="toast" role="status"></div>
+<script>
+"use strict";
+/* ---------- вспомогательное ---------- */
+var $=function(s,r){return (r||document).querySelector(s)};
+var ru=new Intl.NumberFormat("ru-RU");
+function fmt(n){return ru.format(Math.round(n))}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function rnd(seed){var s=seed;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296}}
+function two(n){return (n<10?"0":"")+n}
+function dstr(d){return two(d.getDate())+"."+two(d.getMonth()+1)+"."+d.getFullYear()}
+var toastT;function toast(t){var e=$("#toast");e.textContent=t;e.classList.remove("hidden");clearTimeout(toastT);toastT=setTimeout(function(){e.classList.add("hidden")},2600)}
+function dialog(html){$("#dlgbody").innerHTML=html;var d=$("#dlg");if(d.showModal){d.showModal()}else{d.setAttribute("open","")}}
+$("#dlgclose").onclick=function(){var d=$("#dlg");if(d.close){d.close()}else{d.removeAttribute("open")}};
+var ICON={mail:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>',chart:'<svg viewBox="0 0 24 24"><path d="M5 20V12M12 20V4M19 20V9"/></svg>',tasks:'<svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 12.5l3 3 5-6"/></svg>',user:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.6-4 3.6-6 7-6s6.4 2 7 6"/></svg>',send:'<svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-3-7-7-1z"/></svg>',search:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg>',plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',play:'<svg viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"/></svg>'};
+var SUN="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6L4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 7a5 5 0 100 10 5 5 0 000-10z";
+var MOON="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z";
+
+/* ---------- тема ---------- */
+function isLight(){var t=document.documentElement.dataset.theme;if(t)return t==="light";return window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches}
+function applyTheme(){$("#themeicon").setAttribute("d",isLight()?MOON:SUN)}
+try{var saved=localStorage.getItem("mes-demo-theme");if(saved)document.documentElement.dataset.theme=saved}catch(e){}
+$("#theme").onclick=function(){var next=isLight()?"dark":"light";document.documentElement.dataset.theme=next;try{localStorage.setItem("mes-demo-theme",next)}catch(e){}applyTheme();if(tab==="dash")render()};
+applyTheme();
+
+/* ---------- вымышленные данные ---------- */
+var SERVICES=[["Подключение",4200],["Замена счётчика",1800],["Проверка прибора",950],["Выезд специалиста",1200],["Копия документов",150]];
+var BRANCHES=["Центральный","Северный","Южный","Западный"];
+var ROWS=(function(){var r=rnd(4),out=[],d0=new Date(2026,3,1);for(var i=0;i<420;i++){var d=new Date(d0.getTime()+Math.floor(r()*170)*864e5),s=SERVICES[Math.floor(r()*5)],q=1+Math.floor(r()*6);out.push({d:d,s:s[0],b:BRANCHES[Math.floor(r()*4)],q:q,m:q*s[1]+Math.round((r()-.5)*100)})}out.sort(function(a,b){return a.d-b.d});return out})();
+var SUBJECTS=["ДСЖ","Умные ПУ воды","Реестр платежей за день"];
+var MAILS=(function(){var r=rnd(11),out=[];SUBJECTS.forEach(function(s,si){for(var i=0;i<5;i++){var d=new Date(2026,8,29-i*2-si);out.push({subj:s,from:["Процессинг","Диспетчерская","Бухгалтерия"][si],when:two(8+si)+":"+two(5+i*7)+", "+dstr(d),csv:(s==="ДСЖ"?"VBRR_DSG_":s==="Реестр платежей за день"?"REESTR_":"VBRR_PU_MES_")+d.getFullYear()+"_"+two(d.getMonth()+1)+"_"+two(d.getDate())+".CSV",rows:60+Math.floor(r()*260)})}});return out})();
+var INITIATORS=[{n:"Иванов И. И.",e:"ivanov@demo-mes.example",a:2,b:0,c:1,st:"Готово"},{n:"Петрова А. С.",e:"petrova@demo-mes.example",a:0,b:1,c:0,st:"Готово"},{n:"Сидоров П. П.",e:"sidorov@demo-mes.example",a:1,b:0,c:2,st:"Готово"},{n:"Кузнецова Н. А.",e:"kuznetsova@demo-mes.example",a:3,b:2,c:0,st:"Готово"}];
+
+/* ---------- состояние ---------- */
+var tab=(location.hash||"#mail").slice(1);if(["mail","dash","tasks","subs"].indexOf(tab)<0)tab="mail";
+var S={mail:{q:"ДСЖ",mode:0,box:0,found:null,sel:{},built:null,bySrc:true,delOld:false,rule:0,sent:false},
+ dash:{metrics:{q:true,m:true},type:"bars",step:"week",svc:{},br:{},sel:-1},
+ tasks:[{n:"ДСЖ + ПУ — ежедневно",t:"09:00",rep:"Ежедневно",on:true,last:"сегодня 09:00 · 4 письма"},{n:"Реестр платежей — по будням",t:"08:30",rep:"По дням недели",on:true,last:"вчера 08:30 · 1 письмо"}],
+ newTask:{n:"",t:"09:00",rep:"Ежедневно"},log:"",
+ subs:{loaded:false,sel:0,sent:{}}};
+SERVICES.forEach(function(s){S.dash.svc[s[0]]=true});BRANCHES.forEach(function(b){S.dash.br[b]=true});
+
+/* ---------- меню ---------- */
+var TABS=[["mail","Письма",ICON.mail],["dash","Дашборд",ICON.chart],["tasks","Задачи",ICON.tasks],["subs","Подписки",ICON.user]];
+function renderMenu(){$("#menu").innerHTML=TABS.map(function(t){return '<button data-tab="'+t[0]+'"'+(t[0]===tab?' aria-current="page"':'')+'>'+t[2]+'<span>'+(t[0]==="subs"&&innerWidth>=900?"Подписки юрлиц":t[1])+'</span></button>'}).join("")}
+$("#menu").onclick=function(e){var b=e.target.closest("button");if(!b)return;tab=b.dataset.tab;history.replaceState(null,"","#"+tab);render();scrollTo(0,0)};
+addEventListener("resize",renderMenu);
+
+/* ---------- компоненты ---------- */
+function head(eb,t,em,lead){return '<div><div class="eyebrow">'+eb+'</div><h1>'+t+(em?' <em>'+em+'</em>':'')+'</h1><p class="lead">'+lead+'</p></div>'}
+function chips(group,items,sel){return '<div class="row">'+items.map(function(x,i){return '<button class="chip" data-g="'+group+'" data-i="'+i+'" aria-pressed="'+(sel(i)?"true":"false")+'">'+esc(x)+'</button>'}).join("")+'</div>'}
+function seg(group,items,cur){return '<div class="seg" role="group">'+items.map(function(x,i){return '<button data-g="'+group+'" data-i="'+i+'" aria-pressed="'+(cur===i?"true":"false")+'">'+esc(x)+'</button>'}).join("")+'</div>'}
+function sw(key,text,on){return '<button class="sw" data-sw="'+key+'" aria-pressed="'+(on?"true":"false")+'"><i></i>'+esc(text)+'</button>'}
+
+/* ---------- экран: письма ---------- */
+function mailScreen(){var m=S.mail;var out=head("Outlook · CSV → Excel","Письма →","Excel","Найдите письма по теме — программа сведёт все CSV-вложения в один файл Excel.");
+ out+='<div class="grid cols2"><div class="card"><h2>Поиск писем в Outlook</h2><p class="sub">Демо-ящик: письма вымышленные, ничего не отправляется.</p>';
+ out+='<div class="lbl">Тема письма</div><input type="text" id="q" value="'+esc(m.q)+'" placeholder="Например: ДСЖ" aria-label="Тема письма">';
+ out+='<div class="lbl">История тем</div>'+chips("hist",SUBJECTS,function(){return false});
+ out+='<div class="lbl">Совпадение</div>'+seg("mode",["тема содержит","совпадает точно","начинается с"],m.mode);
+ out+='<div class="lbl">Почтовый ящик</div><select id="box" aria-label="Почтовый ящик"><option'+(m.box===0?" selected":"")+'>Основной ящик (billing@demo-mes.example)</option><option'+(m.box===1?" selected":"")+'>Общий ящик (zayavki@demo-mes.example)</option></select>';
+ out+='<div class="row" style="margin-top:16px"><button class="btn light" id="find">'+ICON.search+'Найти письма</button></div></div>';
+ out+='<div class="card"><h2>Сводный файл</h2><p class="sub">Папка: Документы\\Outlook CSV отчёты</p>'+sw("bySrc","столбцы-источники (файл, тема, дата)",m.bySrc)+sw("delOld","удалять прежние сводные по этой теме",m.delOld)+'<p class="sub" style="margin-top:8px">Повторяющиеся строки остаются в файле и выделяются жёлтым.</p>';
+ out+='<div class="row"><button class="btn primary" id="build"'+(m.found?"":" disabled")+'>Сформировать сводный файл</button><button class="btn ghost" id="todash"'+(m.built?"":" disabled")+'>В дашборд</button></div>';
+ if(m.built){out+='<div class="letter" style="margin-top:14px"><b style="color:var(--paper)">'+esc(m.built.name)+'</b><span class="mono">'+m.built.files+' CSV · '+fmt(m.built.rows)+' строк</span></div>'}
+ out+='</div></div>';
+ if(m.found){out+='<div class="card"><h2>Найденные письма</h2><p class="sub">Нажмите на письмо, чтобы отметить или снять.</p>';
+  if(!m.found.length)out+='<p class="sub">Писем с такой темой нет. Попробуйте «ДСЖ» или «Умные ПУ воды».</p>';
+  m.found.forEach(function(x,i){out+='<button class="mail" data-mail="'+i+'" aria-pressed="'+(m.sel[i]?"true":"false")+'"><span class="cb"></span><span><b>'+esc(x.subj)+'</b><small>'+esc(x.from)+' · '+esc(x.when)+'</small><small>'+esc(x.csv)+' · '+x.rows+' строк</small></span></button>'});
+  var n=Object.keys(m.sel).filter(function(k){return m.sel[k]}).length;out+='<p class="sub" style="margin:10px 0 0">Найдено писем: '+m.found.length+' · отмечено: '+n+'</p></div>'}
+ if(m.built){out+='<div class="card"><h2>Отправка подрядчику</h2><p class="sub">Правило выбирается по теме письма автоматически.</p><select id="rule" aria-label="Правило"><option>ООО «АкваМетрология» · ДСЖ, Умные ПУ воды</option><option>АО «ТеплоСервис» · Реестр платежей за день</option></select><div class="letter" style="margin-top:12px"><div class="meta">Кому: zayavki@akvametr.example<br>Тема: Заявки: '+esc(m.q||"ДСЖ")+' на '+dstr(new Date(2026,8,30))+'</div>Добрый день!<br>Направляем сводный файл по заявкам. Во вложении: '+esc(m.built.name)+'.<br>С уважением, Мосэнергосбыт</div><div class="row" style="margin-top:14px"><button class="btn light" id="send">'+ICON.send+'Отправить подрядчику</button><button class="btn link" id="outlook">Открыть в Outlook</button></div></div>'}
+ return out}
+function doFind(){var m=S.mail,q=(m.q||"").trim().toLowerCase();m.found=MAILS.filter(function(x){var s=x.subj.toLowerCase();return !q||(m.mode===0?s.indexOf(q)>=0:m.mode===1?s===q:s.indexOf(q)===0)});m.sel={};m.found.forEach(function(_,i){m.sel[i]=true});m.built=null;render();toast("Найдено писем: "+m.found.length)}
+function doBuild(){var m=S.mail,pick=m.found.filter(function(_,i){return m.sel[i]});if(!pick.length){toast("Отметьте хотя бы одно письмо");return}
+ var rows=pick.reduce(function(a,x){return a+x.rows},0);m.built={name:"Сводный отчёт "+dstr(new Date(2026,8,30))+" 11-"+two(20+pick.length)+".xlsx",files:pick.length,rows:rows};render();toast("Сводный файл готов")}
+
+/* ---------- экран: дашборд ---------- */
+function weekStart(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());var w=(x.getDay()+6)%7;x.setDate(x.getDate()-w);return x}
+var MON=["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+function dashData(){var D=S.dash,rows=ROWS.filter(function(r){return D.svc[r.s]&&D.br[r.b]});var map={},keys=[];
+ rows.forEach(function(r){var k,lab;if(D.step==="week"){var w=weekStart(r.d);k=w.getTime();lab=two(w.getDate())+"."+two(w.getMonth()+1)}else if(D.step==="month"){k=r.d.getFullYear()*100+r.d.getMonth();lab=MON[r.d.getMonth()]}else{var d0=new Date(r.d.getFullYear(),r.d.getMonth(),r.d.getDate());k=d0.getTime();lab=two(d0.getDate())+"."+two(d0.getMonth()+1)}
+  if(!map[k]){map[k]={k:k,lab:lab,q:0,m:0,n:0};keys.push(k)}map[k].q+=r.q;map[k].m+=r.m;map[k].n++});
+ keys.sort(function(a,b){return a-b});var g=keys.map(function(k){return map[k]});if(D.step==="day")g=g.slice(-30);
+ return {rows:rows,g:g,q:rows.reduce(function(a,r){return a+r.q},0),m:rows.reduce(function(a,r){return a+r.m},0)}}
+function chartSVG(g){var D=S.dash,ser=[];if(D.metrics.q)ser.push({k:"q",name:"Количество",c:isLight()?"#2f62a8":"#7fa8e6"});if(D.metrics.m)ser.push({k:"m",name:"Сумма",c:"#f18d17"});
+ var W=640,H=250,L=44,B=28,T=12,R=10,pw=W-L-R,ph=H-T-B;if(!g.length)return '<p class="sub">По выбранным фильтрам данных нет.</p>';
+ var rel=ser.length>1;var max={};ser.forEach(function(s){max[s.k]=Math.max.apply(null,g.map(function(x){return x[s.k]}))||1});
+ function val(s,x){return rel?x[s.k]/max[s.k]*100:x[s.k]}var top=rel?100:(ser[0]?max[ser[0].k]:1);
+ var nice=function(v){var p=Math.pow(10,Math.floor(Math.log10(v||1))),f=v/p;return (f<=1?1:f<=2?2:f<=5?5:10)*p};var ymax=rel?100:nice(top);
+ var svg='<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="График">';
+ for(var i=0;i<=4;i++){var y=T+ph-ph*i/4,v=ymax*i/4;svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" stroke="var(--line)"/><text x="'+(L-6)+'" y="'+(y+3)+'" text-anchor="end">'+(rel?Math.round(v)+" %":v>=1000?fmt(v/1000)+" тыс":fmt(v))+'</text>'}
+ var n=g.length,gw=pw/n,every=Math.ceil(n/8);
+ g.forEach(function(x,i){if(i%every===0)svg+='<text x="'+(L+gw*i+gw/2)+'" y="'+(H-8)+'" text-anchor="middle">'+x.lab+'</text>'});
+ var y0=T+ph;
+ if(D.type==="bars"){g.forEach(function(x,i){var bw=Math.min(22,gw*.78/ser.length);ser.forEach(function(s,si){var h=val(s,x)/ymax*ph,xx=L+gw*i+gw/2-bw*ser.length/2+bw*si;svg+='<rect x="'+xx+'" y="'+(y0-h)+'" width="'+(bw-1.5)+'" height="'+Math.max(h,0)+'" rx="2" fill="'+s.c+'" opacity="'+(D.sel<0||D.sel===i?1:.45)+'"/>'})})}
+ else{ser.forEach(function(s){var pts=g.map(function(x,i){return [L+gw*i+gw/2,y0-val(s,x)/ymax*ph]});var d=pts.map(function(p,i){return (i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)}).join(" ");
+  if(D.type==="area"){svg+='<path d="'+d+' L'+pts[pts.length-1][0]+' '+y0+' L'+pts[0][0]+' '+y0+'Z" fill="'+s.c+'" opacity=".22"/>'}
+  svg+='<path d="'+d+'" fill="none" stroke="'+s.c+'" stroke-width="2.2" stroke-linejoin="round"/>';if(D.sel>=0){svg+='<circle cx="'+pts[D.sel][0]+'" cy="'+pts[D.sel][1]+'" r="4.5" fill="'+s.c+'"/>'}})}
+ g.forEach(function(x,i){svg+='<rect data-pt="'+i+'" x="'+(L+gw*i)+'" y="'+T+'" width="'+gw+'" height="'+ph+'" fill="transparent" style="cursor:pointer"/>'});
+ svg+='</svg>';return {svg:svg,ser:ser,rel:rel}}
+function dashScreen(){var D=S.dash,d=dashData(),c=chartSVG(d.g);
+ var out=head("Таблицы Excel и CSV · графики и итоги","Дашборд","","Данные журнала «Учёт платных услуг» (вымышленные): 420 строк за апрель — сентябрь 2026.");
+ out+='<div class="kpis"><div class="kpi"><span class="mono">Строк</span><strong>'+fmt(d.rows.length)+'</strong><small>из '+ROWS.length+' · по выбранным фильтрам</small></div><div class="kpi"><span class="mono"><i style="background:'+(isLight()?"#2f62a8":"#7fa8e6")+'"></i>Количество</span><strong>'+fmt(d.q)+'</strong><small>сумма по столбцу</small></div><div class="kpi"><span class="mono"><i style="background:#f18d17"></i>Сумма, ₽</span><strong>'+fmt(d.m)+'</strong><small>сумма по столбцу</small></div><div class="kpi"><span class="mono">Средний чек</span><strong>'+(d.rows.length?fmt(d.m/d.rows.length):"0")+'</strong><small>на одну заявку, ₽</small></div></div>';
+ out+='<div class="grid cols2"><div class="card"><h2>Метрики и вид</h2><p class="sub">Нажмите, чтобы включить или выключить.</p>'+chips("metric",["Количество","Сумма"],function(i){return i===0?D.metrics.q:D.metrics.m})
+  +'<div class="lbl">Шаг по дате</div>'+seg("step",["День","Неделя","Месяц"],["day","week","month"].indexOf(D.step))
+  +'<div class="lbl">Тип графика</div>'+seg("type",["Столбцы","Линии","Области"],["bars","line","area"].indexOf(D.type))
+  +'</div><div class="card"><h2>Фильтры</h2><p class="sub">Можно несколько. Клик по значению — включить или выключить.</p><div class="lbl" style="margin-top:0">Услуга</div>'+chips("svc",SERVICES.map(function(s){return s[0]}),function(i){return D.svc[SERVICES[i][0]]})
+  +'<div class="lbl">Филиал</div>'+chips("br",BRANCHES,function(i){return D.br[BRANCHES[i]]})+'</div></div>';
+ out+='<div class="card"><h2>'+(D.step==="week"?"По неделям":D.step==="month"?"По месяцам":"По дням, последние 30")+'</h2><p class="sub">'+(c.rel?"Относительная шкала: 100 % — максимум каждой метрики. Точные значения — по нажатию на график.":"Нажмите на график, чтобы увидеть значения.")+'</p>';
+ out+='<div class="legend" style="margin-bottom:8px">'+(c.ser||[]).map(function(s){return '<span><i style="background:'+s.c+'"></i>'+s.name+'</span>'}).join("")+'</div><div class="chartbox">'+(c.svg||c)+'</div>';
+ var x=d.g[D.sel];out+='<div class="letter" style="margin-top:10px;min-height:48px">'+(x?'<b style="color:var(--paper)">'+esc(x.lab)+'</b><span class="mono">заявок '+x.n+' · количество '+fmt(x.q)+' · сумма '+fmt(x.m)+' ₽</span>':'<span class="sub" style="margin:0">Значения периода появятся здесь.</span>')+'</div></div>';
+ out+='<div class="card"><h2>Таблица</h2><p class="sub">Итоги по периодам из графика.</p><div class="tablewrap"><table><thead><tr><th>Период</th><th class="n">Строк</th><th class="n">Количество</th><th class="n">Сумма, ₽</th></tr></thead><tbody>'+d.g.slice(-8).map(function(x){return '<tr><td>'+x.lab+'</td><td class="n">'+x.n+'</td><td class="n">'+fmt(x.q)+'</td><td class="n">'+fmt(x.m)+'</td></tr>'}).join("")+'</tbody></table></div></div>';
+ return out}
+
+/* ---------- экран: задачи ---------- */
+function tasksScreen(){var out=head("Планировщик · по расписанию","Задачи","","Сбор писем в сводный файл и отправка подрядчику — сами, в заданное время, без открытия программы.");
+ out+='<div class="grid cols2"><div class="card"><h2>Задачи</h2><p class="sub">Выполняются планировщиком Windows, пока вы вошли в систему.</p>';
+ S.tasks.forEach(function(t,i){out+='<div class="letter" style="margin-bottom:10px"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b style="color:var(--paper)">'+esc(t.n)+'</b><span class="pill'+(t.on?" ok":"")+'">'+(t.on?"включена":"выключена")+'</span></div><span class="mono">'+esc(t.rep)+' · '+esc(t.t)+'</span><span class="sub" style="margin:0">Последний запуск: '+esc(t.last)+'</span><div class="row"><button class="btn ghost" data-run="'+i+'">'+ICON.play+'Запустить сейчас</button><button class="btn link" data-tog="'+i+'">'+(t.on?"Выключить":"Включить")+'</button></div></div>'});
+ out+='</div><div class="card"><h2>Новая задача</h2><div class="lbl" style="margin-top:12px">Название</div><input type="text" id="tn" value="'+esc(S.newTask.n)+'" placeholder="Например: Оплаты каждое утро"><div class="lbl">Повтор</div>'+seg("rep",["Ежедневно","По дням недели","Каждые N часов","Ежемесячно"],["Ежедневно","По дням недели","Каждые N часов","Ежемесячно"].indexOf(S.newTask.rep))+'<div class="lbl">Время</div><input type="text" id="tt" value="'+esc(S.newTask.t)+'" inputmode="numeric" aria-label="Время"><div class="row" style="margin-top:16px"><button class="btn primary" id="addtask">'+ICON.plus+'Сохранить и включить</button></div></div></div>';
+ if(S.log)out+='<div class="card"><h2>Журнал запуска</h2><div class="log">'+esc(S.log)+'</div></div>';return out}
+function runTask(i){var t=S.tasks[i];var lines=["["+two(9)+":00:01] Задача «"+t.n+"» запущена","[09:00:02] Outlook: поиск писем с темой «ДСЖ»… найдено 4","[09:00:05] Обработано CSV-вложений: 4, строк: 842","[09:00:07] Сводный файл сформирован: Сводный отчёт 30.09.2026.xlsx","[09:00:09] Письмо подрядчику подготовлено (демо: не отправлено)"];S.log=lines.join("\n");t.last="только что · 4 письма";render();toast("Задача выполнена (демо)")}
+
+/* ---------- экран: подписки ---------- */
+function subsScreen(){var o=S.subs;var out=head("Сверка журналов","Подписки для","юрлиц","Сверка заявок прошлого и текущего месяца и письмо каждому инициатору одним кликом.");
+ out+='<div class="card"><h2>Файлы для сверки</h2><p class="sub">Два журнала учёта платных услуг: за прошлый и за текущий месяц.</p><div class="grid cols2"><div class="letter"><b style="color:var(--paper)">Прошлый месяц</b><span class="sub" style="margin:0">Заявки, по которым проверяем оплату и закрытие.</span><span>'+(o.loaded?"Журнал_август.xlsx":"Файл не выбран")+'</span></div><div class="letter"><b style="color:var(--paper)">Текущий месяц</b><span class="sub" style="margin:0">Заявки, в которых ищем продление.</span><span>'+(o.loaded?"Журнал_сентябрь.xlsx":"Файл не выбран")+'</span></div></div><div class="row" style="margin-top:14px"><button class="btn '+(o.loaded?"ghost":"primary")+'" id="loadsubs">'+(o.loaded?"Загрузить заново":"Выбрать файлы (демо)")+'</button></div></div>';
+ if(o.loaded){out+='<div class="grid cols2"><div class="card"><h2>Инициаторы</h2><p class="sub">Письмо получает каждый инициатор со своими заявками.</p><div class="tablewrap"><table><thead><tr><th>Инициатор</th><th class="n">Не закрыто</th><th class="n">Нет заявки</th><th class="n">Не оплачено</th><th>Статус</th></tr></thead><tbody>'+INITIATORS.map(function(x,i){return '<tr data-ini="'+i+'" style="cursor:pointer'+(o.sel===i?";background:var(--glass2)":"")+'"><td>'+esc(x.n)+'</td><td class="n">'+x.a+'</td><td class="n">'+x.b+'</td><td class="n">'+x.c+'</td><td><span class="pill'+(o.sent[i]?" ok":"")+'">'+(o.sent[i]?"Отправлено":x.st)+'</span></td></tr>'}).join("")+'</tbody></table></div><div class="row" style="margin-top:14px"><button class="btn ghost" id="sendall">'+ICON.send+'Отправить всем</button></div></div>';
+  var x=INITIATORS[o.sel];out+='<div class="card"><h2>Письмо инициатору</h2><p class="sub">Предпросмотр: так письмо увидит получатель.</p><div class="letter"><div class="meta">Кому: '+esc(x.e)+'<br>Тема: Подписки юрлиц — сверка за сентябрь</div>Здравствуйте!<br>По вашим заявкам за август есть вопросы: '+x.a+' '+(x.a===1?"заявка не закрыта":"заявки не закрыты")+', '+x.c+' не оплачено. Список — во вложении.<br>Спасибо!</div><div class="row" style="margin-top:14px"><button class="btn primary" id="sendone">'+ICON.send+'Отправить инициатору</button></div></div></div>'}
+ return out}
+
+/* ---------- отрисовка и события ---------- */
+function render(){renderMenu();var f={mail:mailScreen,dash:dashScreen,tasks:tasksScreen,subs:subsScreen}[tab];var keep=document.activeElement&&document.activeElement.id;$("#screen").innerHTML='<div style="display:flex;flex-direction:column;gap:18px">'+f()+'</div>';if(keep){var el=document.getElementById(keep);if(el&&el.tagName==="INPUT"){el.focus();var v=el.value;el.value="";el.value=v}}}
+document.addEventListener("input",function(e){var t=e.target;if(t.id==="q")S.mail.q=t.value;if(t.id==="tn")S.newTask.n=t.value;if(t.id==="tt")S.newTask.t=t.value});
+document.addEventListener("change",function(e){var t=e.target;if(t.id==="box")S.mail.box=t.selectedIndex;if(t.id==="rule")S.mail.rule=t.selectedIndex});
+document.addEventListener("click",function(e){var t=e.target,b=t.closest("[data-g],[data-sw],[data-mail],[data-run],[data-tog],[data-ini],[data-pt],button[id]");if(!b)return;
+ if(b.dataset.pt!==undefined){S.dash.sel=+b.dataset.pt;render();return}
+ if(b.dataset.g){var g=b.dataset.g,i=+b.dataset.i;
+  if(g==="hist"){S.mail.q=SUBJECTS[i];render()}
+  else if(g==="mode"){S.mail.mode=i;render()}
+  else if(g==="metric"){var k=i===0?"q":"m",o=i===0?"m":"q";if(S.dash.metrics[k]&&!S.dash.metrics[o]){toast("Нужна хотя бы одна метрика");return}S.dash.metrics[k]=!S.dash.metrics[k];render()}
+  else if(g==="step"){S.dash.step=["day","week","month"][i];S.dash.sel=-1;render()}
+  else if(g==="type"){S.dash.type=["bars","line","area"][i];render()}
+  else if(g==="svc"){var n=SERVICES[i][0];S.dash.svc[n]=!S.dash.svc[n];S.dash.sel=-1;render()}
+  else if(g==="br"){var bn=BRANCHES[i];S.dash.br[bn]=!S.dash.br[bn];S.dash.sel=-1;render()}
+  else if(g==="rep"){S.newTask.rep=["Ежедневно","По дням недели","Каждые N часов","Ежемесячно"][i];render()}
+  return}
+ if(b.dataset.sw){S.mail[b.dataset.sw]=!S.mail[b.dataset.sw];render();return}
+ if(b.dataset.mail!==undefined){var k2=+b.dataset.mail;S.mail.sel[k2]=!S.mail.sel[k2];render();return}
+ if(b.dataset.run!==undefined){runTask(+b.dataset.run);return}
+ if(b.dataset.tog!==undefined){var tk=S.tasks[+b.dataset.tog];tk.on=!tk.on;render();return}
+ if(b.dataset.ini!==undefined){S.subs.sel=+b.dataset.ini;render();return}
+ var id=b.id;
+ if(id==="find")doFind();
+ else if(id==="build")doBuild();
+ else if(id==="todash"){tab="dash";history.replaceState(null,"","#dash");render();scrollTo(0,0);toast("Сводный файл загружен в дашборд")}
+ else if(id==="send"){var n2=S.mail.built;dialog('<h3>Письмо подготовлено</h3><div class="letter"><div class="meta">Кому: zayavki@akvametr.example<br>Тема: Заявки: '+esc(S.mail.q||"ДСЖ")+' на 30.09.2026<br>Вложение: '+esc(n2.name)+'</div>Добрый день! Направляем сводный файл по заявкам.</div><p class="sub" style="margin-top:12px">Демонстрационный режим: письмо никуда не отправлено.</p>')}
+ else if(id==="outlook")toast("В программе здесь откроется окно Outlook");
+ else if(id==="addtask"){var nt=S.newTask;if(!nt.n.trim()){toast("Введите название задачи");return}S.tasks.unshift({n:nt.n.trim(),t:nt.t||"09:00",rep:nt.rep,on:true,last:"ещё не запускалась"});S.newTask={n:"",t:"09:00",rep:"Ежедневно"};render();toast("Задача сохранена и включена")}
+ else if(id==="loadsubs"){S.subs.loaded=true;S.subs.sent={};render();toast("Журналы загружены, сверка выполнена")}
+ else if(id==="sendone"){S.subs.sent[S.subs.sel]=true;render();toast("Письмо инициатору подготовлено (демо)")}
+ else if(id==="sendall"){INITIATORS.forEach(function(_,i){S.subs.sent[i]=true});render();toast("Письма всем инициаторам подготовлены (демо)")}
+});
+render();
+</script>
+
+</body></html>
